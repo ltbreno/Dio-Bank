@@ -1,28 +1,25 @@
-import { Center,Box, ChakraProvider, Input, Button } from '@chakra-ui/react'
-import { login } from './Services/login';
+import { BrowserRouter } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import { Layout } from './components/Layout';
-
-
+import { AppContextProvider } from './components/AppContext';
+import MainRoutes from './routes';
+import { createLocalStorage, getAllLocalStorage } from './Services/storage';
 
 function App() {
+
+  !getAllLocalStorage() && createLocalStorage()
+
   return (
-    <ChakraProvider>
-      <Layout>
-      <Box minHeight='100vh' backgroundColor='#850FDD' padding='25px'>
-        <Box backgroundColor='#FFFFFF' borderRadius='25px' padding='15px'>
-          <Center>
-            <h1>Faça o login</h1>
-            </Center>
-          <Input placeholder='email' /> 
-          <Input placeholder='password' />
-          <Center>
-          <Button onClick={login} marginTop ='10px' colorScheme='purple' width='100%'>Login</Button>
-          </Center> 
-        </Box>
-      </Box>
-      </Layout>
-    </ChakraProvider>
+    <BrowserRouter>
+      <AppContextProvider>
+        <ChakraProvider>
+          <Layout>
+            <MainRoutes />
+          </Layout>
+        </ChakraProvider>
+      </AppContextProvider>
+    </BrowserRouter>
+    
   );
 }
-
 export default App;

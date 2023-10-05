@@ -1,17 +1,16 @@
-interface ICard {
-    id: number,
-    paragraph: string,
-    details: string
-}
+import {  useState } from 'react'
+import { Box,Center,Input } from "@chakra-ui/react"
+import { login } from "../Services/login"
+import DButton from "./DButton"
 
 
-export const Card = ({id,paragraph,details}: ICard) => {
-    console.log(id)
+
+export const Card = ({ children }: any) => {
+
     return (
-        <div>
-            <h1>Card {id}</h1>
-            <p>{paragraph}</p>
-            <p>{details}</p>
-        </div>
-    )
-}
+    <Box backgroundColor="#FFFFFF" borderRadius="25px" padding="15px">
+        { children }
+        
+    </Box>
+    );    
+};
